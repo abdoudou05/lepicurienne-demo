@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"C:\\\\Users\\\\Hajji\\\\OneDrive - Webryk Studio\\\\Documents\\\\Clients\\\\Demo\\\\\" 2>/dev/null || dir \"C:/Users/Hajji/OneDrive - Webryk Studio/Documents/Clients/Demo/\")",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Hajji\\\\OneDrive - Webryk Studio\\\\\" -Recurse -Depth 4 -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -match \"Br|lures|Renaissance|demo|Demo\" } | Select-Object -First 20 FullName)"
+    ]
+  }
+}
