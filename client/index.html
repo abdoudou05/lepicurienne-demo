@@ -6,11 +6,190 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>L'Épicurienne by Waycha — Jus exotiques, brunch & traiteur | Québec</title>
-    <meta name="description" content="Saveurs africaines authentiques, jus exotiques maison, brunch gourmand et service traiteur à Québec. L'Épicurienne by Waycha." />
+    <title>L'Épicurienne By Waycha — Jus Artisanaux & Saveurs Authentiques d'Afrique</title>
+    <meta name="description" content="Découvrez nos jus naturels faits maison : Gingembre, Bouye, Bouye Fraise, Maad, Diabolo Menthe. 100% naturels, riches en bienfaits." />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://lepicuriennebywaycha.ca/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lepicuriennebywaycha.ca/" />
+    <meta property="og:title" content="L'Épicurienne By Waycha — Jus Artisanaux & Saveurs Authentiques d'Afrique" />
+    <meta property="og:description" content="Découvrez nos jus naturels faits maison : Gingembre, Bouye, Bouye Fraise, Maad, Diabolo Menthe. 100% naturels, riches en bienfaits." />
+    <meta property="og:image" content="https://lepicuriennebywaycha.ca/assets/juice_cinematic.png" />
+    <meta property="og:locale" content="fr_CA" />
+    <meta property="og:site_name" content="L'Épicurienne By Waycha" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://lepicuriennebywaycha.ca/" />
+    <meta name="twitter:title" content="L'Épicurienne By Waycha — Jus Artisanaux & Saveurs Authentiques d'Afrique" />
+    <meta name="twitter:description" content="Découvrez nos jus naturels faits maison : Gingembre, Bouye, Bouye Fraise, Maad, Diabolo Menthe. 100% naturels, riches en bienfaits." />
+    <meta name="twitter:image" content="https://lepicuriennebywaycha.ca/assets/juice_cinematic.png" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Restaurant",
+          "@id": "https://lepicuriennebywaycha.ca/#restaurant",
+          "name": "L'Épicurienne By Waycha",
+          "description": "Saveurs africaines authentiques, jus exotiques faits maison, brunch gourmand et service traiteur à Québec.",
+          "image": "https://lepicuriennebywaycha.ca/assets/logo.png",
+          "telephone": "819-448-3630",
+          "email": "lepicuriennebywaycha@gmail.com",
+          "priceRange": "$$",
+          "servesCuisine": ["African", "Artisanal Juices", "Brunch", "Catering"],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "3037 Rue de la Forêt App 26",
+            "addressLocality": "Québec",
+            "addressRegion": "QC",
+            "addressCountry": "CA"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "09:00",
+              "closes": "21:00"
+            }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=100067137965610",
+            "https://www.instagram.com/waycha88",
+            "https://webryk.ca"
+          ]
+        },
+        {
+          "@type": ["Product", "MenuItem"],
+          "@id": "https://lepicuriennebywaycha.ca/#product-gingembre",
+          "name": "Gingembre",
+          "description": "Extrait de gingembre pur pressé à froid. Anti-nausée, apaisant maux de gorge, stimule la digestion. 100% naturel, 1L.",
+          "image": "https://lepicuriennebywaycha.ca/assets/juice_gingembre_ananas.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "L'Épicurienne By Waycha"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "12.00",
+            "priceCurrency": "CAD",
+            "availability": "https://schema.org/InStock",
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": "1",
+              "unitText": "L"
+            }
+          }
+        },
+        {
+          "@type": ["Product", "MenuItem"],
+          "@id": "https://lepicuriennebywaycha.ca/#product-bouye-fraise",
+          "name": "Bouye Fraise",
+          "description": "Smoothie baobab & fraise. Alliance veloutée du pain de singe et des fraises fraîches. 100% naturel, 1L.",
+          "image": "https://lepicuriennebywaycha.ca/assets/juice_bouye_fraise.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "L'Épicurienne By Waycha"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "12.00",
+            "priceCurrency": "CAD",
+            "availability": "https://schema.org/InStock",
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": "1",
+              "unitText": "L"
+            }
+          }
+        },
+        {
+          "@type": ["Product", "MenuItem"],
+          "@id": "https://lepicuriennebywaycha.ca/#product-maad",
+          "name": "Maad",
+          "description": "Trésor sauvage d'Afrique de l'Ouest issu de la liane sauvage Saba Senegalensis, riche en Vitamines C, B6, B3, Calcium et Magnésium. 1L.",
+          "image": "https://lepicuriennebywaycha.ca/assets/juice_cinematic.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "L'Épicurienne By Waycha"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "15.00",
+            "priceCurrency": "CAD",
+            "availability": "https://schema.org/InStock",
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": "1",
+              "unitText": "L"
+            }
+          }
+        },
+        {
+          "@type": ["Product", "MenuItem"],
+          "@id": "https://lepicuriennebywaycha.ca/#product-diabolo-menthe",
+          "name": "Diabolo Menthe",
+          "description": "Nectar onctueux menthe fraîche & lait, saveur crème glacée artisanale menthe-vanille. 1L.",
+          "image": "https://lepicuriennebywaycha.ca/assets/juice_diabolo_menthe.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "L'Épicurienne By Waycha"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "12.00",
+            "priceCurrency": "CAD",
+            "availability": "https://schema.org/InStock",
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": "1",
+              "unitText": "L"
+            }
+          }
+        },
+        {
+          "@type": ["Product", "MenuItem"],
+          "@id": "https://lepicuriennebywaycha.ca/#product-bouye",
+          "name": "Bouye (Plain Baobab)",
+          "description": "Pain de singe 100% naturel du Sénégal, super-aliment d'exception riche en fibres prébiotiques et nutriments fortifiants. 1L.",
+          "image": "https://lepicuriennebywaycha.ca/assets/juice_bouye_passion.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "L'Épicurienne By Waycha"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "12.00",
+            "priceCurrency": "CAD",
+            "availability": "https://schema.org/InStock",
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": "1",
+              "unitText": "L"
+            }
+          }
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>
@@ -23,3 +202,4 @@
   </body>
 
 </html>
+
