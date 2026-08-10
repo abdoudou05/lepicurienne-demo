@@ -31,7 +31,7 @@
 | M1 | Product Lineup & Detail Modal Integration | Features 1-7 (5 authentic products, $12/$15 pricing, 1L volume, health pills, detail modals/drawers) | none | DONE |
 | M2 | Webryk Branding & Contact Details Update | Features 8-9 (Webryk Studio footer attribution with link, updated contact/pickup info) | M1 | DONE |
 | M3 | International SEO & Mobile-First Polish | Features 10-12 (JSON-LD LocalBusiness & Product schemas, OG/Twitter meta, HTML5 semantics, mobile polish) | M2 | DONE |
-| M4 | Verification, Git Commit & Push | Features 13-14 (npm run check, npm run build, git commit & push to GitHub master) | M3 | PLANNED |
+| M4 | Verification, Git Commit & Push | Features 13-14 (npm run check, npm run build, git commit & push to GitHub master) | M3 | DONE |
 
 ## Interface Contracts
 ### Data ↔ UI Component Contract

@@ -101,51 +101,52 @@ const copy = {
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "Extrait de gingembre pur pressé à froid, offrant un piquant authentique, vivifiant et profondément revitalisant.",
-          longDescription: "Préparé selon des méthodes traditionnelles d'Afrique de l'Ouest, notre nectar de gingembre pur exprime la puissance brute de la racine sacrée. Une boisson vivifiante, piquante et bienfaisante qui réveille l'organisme tout en procurant un bien-être digestif immédiat.",
-          tasteProfile: "Intense, piquant, chaleureux avec des notes citronnées et épicées.",
+          description: "Le trésor de la nature pour votre bien-être. Boisson vivifiante aux vertus de santé essentielles.",
+          longDescription: "Préparé selon des méthodes artisanales traditionnelles, notre nectar de gingembre pur exprime la puissance brute de la racine naturelle. Une boisson bienfaisante, stimulante et tonifiante qui apaise les nausées, soulage la gorge et renforce la vitalité au quotidien.",
+          tasteProfile: "Intense, piquant, chaleureux avec des notes vivifiantes de gingembre frais.",
           ingredients: [
-            "Gingembre frais bio",
-            "Eau pure de source",
-            "Jus de citron vert fraîchement pressé",
-            "Touche de miel d'acacia"
+            "Gingembre frais pur",
+            "Eau de source pure",
+            "Jus de citron vert",
+            "Touche de miel naturel"
           ],
           healthBenefits: [
-            "Anti-nausée",
-            "Apaisant maux de gorge",
-            "Stimule la digestion",
-            "Anti-inflammatoire"
+            "Anti-nausées & vomissements",
+            "Soulage le mal de gorge",
+            "Calme nausées de grossesse",
+            "Stimule l'estomac & digestion",
+            "Soulage douleurs musculaires",
+            "Aphrodisiaque naturel"
           ],
-          image: "/assets/juice_gingembre_ananas.png",
+          image: "/assets/flyer_gingembre.jpg",
           color: "from-amber-400 to-yellow-600",
-          badge: "Incontournable"
+          badge: "Bestseller ($12)"
         },
         {
           id: "bouye-fraise",
           name: "Bouye Fraise",
-          tagline: "Smoothie Baobab & Fraise",
+          tagline: "Mélange Fruité & Exotique",
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "L'alliance parfaite entre l'onctuosité veloutée du pain de singe et la douceur fruitée des fraises mûres.",
-          longDescription: "Un nectar crémeux à la texture de smoothie gourmand. Le fruit du baobab (pain de singe) apporte une consistance veloutée unique et un profil nutritionnel remarquable, sublimé par la fraîcheur sucrée de la fraise.",
-          tasteProfile: "Onctueux, crémeux, velouté aux douceurs de fraise fraîche.",
+          description: "À déguster comme un smoothie ! Alliance veloutée du baobab et douceur acidulée de la fraise.",
+          longDescription: "Un doux mélange naturel, onctueux et rafraîchissant qui allie la richesse nutritive du bouye (pain de singe) à la fraîcheur gourmande des fraises sélectionnées. Un smoothie idéal à tout moment de la journée.",
+          tasteProfile: "Crémeux, fruité, onctueux avec une touche acidulée délicieuse.",
           ingredients: [
-            "Pulpe naturelle de Baobab (Pain de singe)",
-            "Purée de fraises fraîches",
-            "Eau de source pure",
-            "Lait vanillé léger",
-            "Sucre de canne bio"
+            "Fruit du baobab (Bouye)",
+            "Fraises sélectionnées",
+            "Eau pure",
+            "Sans colorant ni conservateur"
           ],
           healthBenefits: [
-            "Riche en Vitamine C",
-            "Puissants Antioxydants",
-            "Apport en Fibres doux",
-            "Énergie Naturelle"
+            "Favorise la satiété",
+            "Concentration en Vitamine C",
+            "Riche en fibres & transit",
+            "Énergie & vitalité au quotidien"
           ],
-          image: "/assets/juice_bouye_fraise.png",
+          image: "/assets/flyer_bouye_fraise.jpg",
           color: "from-pink-400 to-red-500",
-          badge: "Smoothie Crémeux"
+          badge: "Smoothie Onctueux ($12)"
         },
         {
           id: "maad",
@@ -154,22 +155,23 @@ const copy = {
           price: 15,
           formattedPrice: "$15",
           volume: "1L",
-          description: "Nectar rare d'exception issu de la liane sauvage Saba Senegalensis, mariage captivant d'acidité et de sucres naturels.",
-          longDescription: "Le Maad est l'un des fruits sauvages les plus précieux du Sénégal et de l'Afrique de l'Ouest. Récolté de façon artisanale au cœur de la brousse, son jus délivre une explosion aromatique unique et une richesse minérale hors du commun.",
-          tasteProfile: "Intensément acidulé, fruité, envoûtant avec des notes tropicales sauvages.",
+          description: "Fruit à coque jaune et à pulpe juteuse d'Afrique de l'Ouest. Goût acidulé unique et revigorant.",
+          longDescription: "Issu de la liane sauvage Saba Senegalensis, le Maad est un trésor rare et sauvage. Tonique naturelle idéale pour revitaliser le corps et l'esprit, elle apporte un concentré exceptionnel de nutriments et de minéraux essentiels.",
+          tasteProfile: "Acidulé, sauvage, fruité et profondément désaltérant.",
           ingredients: [
-            "Pulpe de fruit sauvage Maad (Saba senegalensis)",
+            "Pulpe sauvage de Maad (Saba senegalensis)",
             "Eau pure de source",
             "Sucre de canne naturel",
-            "Pincée de sel marin traditionnel"
+            "Pincée de sel marin"
           ],
           healthBenefits: [
             "Riche en Vitamine C",
             "Vitamines B6 & B3",
             "Source de Calcium (Ca)",
-            "Riche en Magnésium (Mg)"
+            "Riche en Magnésium (Mg)",
+            "Tonique naturelle du corps"
           ],
-          image: "/assets/juice_cinematic.png",
+          image: "/assets/flyer_maad.jpg",
           color: "from-amber-500 to-orange-700",
           badge: "Trésor Sauvage ($15)"
         },
@@ -180,50 +182,128 @@ const copy = {
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "La vivacité de la menthe poivrée fraîche fondue dans la douceur du lait, évoquant la saveur d'une crème glacée artisanale.",
-          longDescription: "Une création réconfortante et rafraîchissante. La menthe fraîche cueillie à la main s'unit à la douceur lactée pour composer un nectar onctueux qui apaise le palais et rappelle la gourmandise d'un dessert glacé.",
-          tasteProfile: "Frais, lacté, onctueux aux notes de crème glacée menthe-vanille.",
+          description: "Une boisson fraîche, onctueuse et délicieusement différente à la saveur d'une crème glacée !",
+          longDescription: "Une version unique et gourmande préparée avec de la menthe fraîche et du lait. Parfaitement adaptée pour adultes et enfants, cette boisson offre une fraîcheur lactée rafraîchissante et bienfaisante.",
+          tasteProfile: "Frais, lacté, onctueux aux arômes de crème glacée menthe-vanille.",
           ingredients: [
-            "Feuilles de menthe poivrée fraîche",
-            "Lait entier onctueux",
+            "Menthe fraîche naturelle",
+            "Lait onctueux",
             "Sirop de menthe artisanale",
-            "Extrait naturel de vanille"
+            "Touche de vanille"
           ],
           healthBenefits: [
-            "Digestif Apaisé",
-            "Rafraîchissement Intense",
-            "Douceur Lactée Réconfortante"
+            "Digestion optimale",
+            "Santé bucco-dentaire",
+            "Apaisement & concentration",
+            "Confort respiratoire & osseux"
           ],
-          image: "/assets/juice_diabolo_menthe.png",
+          image: "/assets/flyer_diabolo_menthe.jpg",
           color: "from-emerald-400 to-teal-600",
-          badge: "Gourmandise Glacée"
+          badge: "Gourmandise Glacée ($12)"
         },
         {
           id: "bouye",
-          name: "Bouye (Plain Baobab)",
-          tagline: "Pain de Singe 100% Naturel",
+          name: "Bouye (Pain de Singe)",
+          tagline: "Fruit Emblématique du Baobab Africain",
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "Le nectar traditionnel du Baobab sénégalais dans sa pureté absolue, super-aliment d'exception riche en fibres.",
-          longDescription: "Symbole de longévité et de santé en Afrique, le Baobab offre son fruit mythique : le Pain de Singe. Ce nectar traditionnellement préparé délivre une texture veloutée incomparable, gorgée de fibres prébiotiques et de nutriments fortifiants.",
-          tasteProfile: "Doux, suave, délicatement acidulé au corps riche et velouté.",
+          description: "Au cœur de sa coque se renferme une pulpe acidulée et sucrée naturellement. Super-aliment d'exception.",
+          longDescription: "Symbole de santé et de longévité en Afrique, le fruit du baobab (pain de singe) délivre une texture douce et veloutée. Gorgé de vitamine C, minéraux et fibres prébiotiques fortifiantes.",
+          tasteProfile: "Doux, suave, velouté aux notes légèrement acidulées.",
           ingredients: [
-            "100% Pulpe de Baobab naturel (Pain de singe)",
-            "Eau de source pure",
+            "100% Pulpe de Baobab (Pain de singe)",
+            "Eau pure de source",
             "Lait doux",
-            "Sucre de canne roux",
-            "Arôme naturel de fleur d'oranger"
+            "Sucre roux naturel"
           ],
           healthBenefits: [
-            "Prébiotique Naturel",
-            "Riche en Fibres",
-            "Fortifiant Immunitaire",
-            "Vitalité & Énergie"
+            "Riche en Vitamine C",
+            "Combat la gastro-entérite",
+            "Riche en minéraux & fibres",
+            "Prébiotique naturel fortifiant"
           ],
-          image: "/assets/juice_bouye_passion.png",
-          color: "from-amber-200 to-orange-400",
-          badge: "100% Naturel"
+          image: "/assets/flyer_bouye.jpg",
+          color: "from-amber-300 to-orange-500",
+          badge: "100% Naturel ($12)"
+        },
+        {
+          id: "hibiscus-bissap",
+          name: "Hibiscus ou Bissap",
+          tagline: "Naturel, Rafraîchissant, Bienfaisant",
+          price: 10,
+          formattedPrice: "$10",
+          volume: "1L",
+          description: "Infusion rouge rubis aux puissantes propriétés antioxydantes, désaltérante et bénéfique pour le cœur.",
+          longDescription: "Notre jus d'Hibiscus (Bissap) est une infusion artisanale pure de fleurs d'hibiscus tropicales. Une boisson naturellement rafraîchissante, reconnue pour son soutien cardiovasculaire et son action antioxydante d'exception.",
+          tasteProfile: "Acidulé, floral, très désaltérant aux notes vives de fruits rouges.",
+          ingredients: [
+            "Fleurs d'hibiscus fraîches (Bissap)",
+            "Eau pure de source",
+            "Sucre de canne bio",
+            "Feuilles de menthe"
+          ],
+          healthBenefits: [
+            "Antioxydant très puissant",
+            "Hydratant & désaltérant",
+            "Soutien cardiovasculaire",
+            "100% Naturel & bienfaisant"
+          ],
+          image: "/assets/flyer_hibiscus_bissap.jpg",
+          color: "from-red-600 to-rose-900",
+          badge: "Super Antioxydant ($10)"
+        },
+        {
+          id: "corossol",
+          name: "Corossol",
+          tagline: "Fruit Exotique Doux & Onctueux",
+          price: 15,
+          formattedPrice: "$15",
+          volume: "1L",
+          description: "Nectar d'exception issu de la chair du corossol mûr, naturellement riche en vitamine C et antioxydants.",
+          longDescription: "Extrait du fruit exotique corossol (Annona muricata), ce jus onctueux booste le système immunitaire, régule le transit intestinal grâce à ses fibres végétales et aide à apaiser le stress au quotidien.",
+          tasteProfile: "Onctueux, doux, velouté aux arômes exotiques de fraise et d'agrumes.",
+          ingredients: [
+            "Pulpe fraîche de Corossol",
+            "Eau pure de source",
+            "Sucre de canne naturel",
+            "Jus de citron"
+          ],
+          healthBenefits: [
+            "Booste le système immunitaire",
+            "Riche en Vitamine C & antioxydants",
+            "Régule le transit (fibres)",
+            "Aide à gérer stress & glycémie"
+          ],
+          image: "/assets/flyer_corossol.jpg",
+          color: "from-lime-600 to-emerald-800",
+          badge: "Exotique Onctueux ($15)"
+        },
+        {
+          id: "ditax",
+          name: "Ditax",
+          tagline: "100% Naturel & Authentique",
+          price: 15,
+          formattedPrice: "$15",
+          volume: "1L",
+          description: "Jus du fruit sauvage Ditax, bien tamisé pour une texture lisse et veloutée, naturellement peu sucré.",
+          longDescription: "Le Ditax (Detarium senegalense) est un fruit sauvage précieux d'Afrique de l'Ouest. Notre jus est méticuleusement tamisé sans fibres pour offrir un nectar velouté d'une fraîcheur garantie aux vertus thérapeutiques et anti-inflammatoires.",
+          tasteProfile: "Unique, acidulé, herbacé et rafraîchissant.",
+          ingredients: [
+            "Pulpe naturelle de Ditax",
+            "Eau pure de source",
+            "Touche de sucre naturel",
+            "Jus de citron"
+          ],
+          healthBenefits: [
+            "Riche en Vitamine C",
+            "Pouvoir antioxydant élevé",
+            "Facilite la digestion",
+            "Vertus anti-inflammatoires"
+          ],
+          image: "/assets/flyer_ditax.jpg",
+          color: "from-green-600 to-emerald-900",
+          badge: "Fruit Sauvage ($15)"
         }
       ] as JuiceItem[],
     },
@@ -343,51 +423,52 @@ const copy = {
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "Pure cold-pressed ginger nectar delivering an authentic, zesty, and deeply revitalizing warmth.",
-          longDescription: "Crafted following ancestral West African recipes, our pure ginger nectar captures the raw power of the sacred root. An invigorating, spicy potion that wakes up your energy while promoting optimal digestive comfort.",
-          tasteProfile: "Intense, zesty, warm with citrus and spicy undertones.",
+          description: "Nature's treasure for your wellness. An invigorating nectar packed with essential health benefits.",
+          longDescription: "Crafted following ancestral West African recipes, our pure ginger nectar captures the raw power of the sacred root. An invigorating, spicy potion that calms nausea, soothes throat discomfort, and boosts daily vitality.",
+          tasteProfile: "Intense, zesty, warm with invigorating fresh ginger notes.",
           ingredients: [
-            "Fresh organic ginger",
+            "Pure fresh ginger",
             "Pure spring water",
-            "Freshly squeezed lime juice",
-            "Touch of acacia honey"
+            "Fresh lime juice",
+            "Touch of natural honey"
           ],
           healthBenefits: [
-            "Anti-nausea",
+            "Anti-nausea & vomiting",
             "Sore throat relief",
-            "Digestion boost",
-            "Anti-inflammatory"
+            "Calms pregnancy nausea",
+            "Stomach & digestion boost",
+            "Muscular pain relief",
+            "Natural aphrodisiac"
           ],
-          image: "/assets/juice_gingembre_ananas.png",
+          image: "/assets/flyer_gingembre.jpg",
           color: "from-amber-400 to-yellow-600",
-          badge: "Bestseller"
+          badge: "Bestseller ($12)"
         },
         {
           id: "bouye-fraise",
           name: "Baobab Strawberry",
-          tagline: "Baobab & Strawberry Smoothie",
+          tagline: "Fruity & Exotic Blend",
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "The velvety creaminess of baobab fruit paired with the sweet, vibrant burst of sun-ripened strawberries.",
-          longDescription: "A lush, smoothie-style nectar with an ultra-smooth velvety texture. Baobab fruit (monkey bread) gives an unmatched nutritional richness and silky body, elevated by fresh strawberry puree.",
-          tasteProfile: "Creamy, velvety, gently tangy with sweet strawberry notes.",
+          description: "Enjoy like a smoothie! The silky blend of baobab fruit and sweet tangy strawberries.",
+          longDescription: "A gentle, smooth, and refreshing natural blend combining the nutritional wealth of bouye (monkey bread) with the delicious sweetness of selected strawberries. An ideal smoothie for any time of day.",
+          tasteProfile: "Creamy, fruity, velvety with a delicious tangy touch.",
           ingredients: [
-            "Natural Baobab fruit pulp (Monkey bread)",
-            "Fresh strawberry puree",
-            "Pure spring water",
-            "Light vanilla milk",
-            "Organic cane sugar"
+            "Baobab fruit (Bouye)",
+            "Selected fresh strawberries",
+            "Pure water",
+            "No artificial colors or preservatives"
           ],
           healthBenefits: [
-            "Rich in Vitamin C",
-            "Powerful Antioxidants",
-            "Gentle Fiber Boost",
-            "Natural Energy"
+            "Promotes satiety",
+            "High Vitamin C content",
+            "Rich in fiber & digestion",
+            "Daily energy & vitality"
           ],
-          image: "/assets/juice_bouye_fraise.png",
+          image: "/assets/flyer_bouye_fraise.jpg",
           color: "from-pink-400 to-red-500",
-          badge: "Creamy Smoothie"
+          badge: "Creamy Smoothie ($12)"
         },
         {
           id: "maad",
@@ -396,22 +477,23 @@ const copy = {
           price: 15,
           formattedPrice: "$15",
           volume: "1L",
-          description: "Rare wild fruit nectar extracted from Saba Senegalensis, a sublime harmony of tangy vitality and sweetness.",
-          longDescription: "Maad is West Africa's most coveted wild fruit. Hand-harvested deep in tropical forests, this legendary nectar delivers a vibrant burst of natural acidity, rich minerals, and essential vitamins.",
-          tasteProfile: "Intensely tangy, fruity, exotic with wild tropical notes.",
+          description: "West African wild yellow nut fruit with juicy pulp. Unique, tangy, and deeply invigorating.",
+          longDescription: "Harvested from the wild Saba Senegalensis vine, Maad is a rare wild treasure. A natural tonic ideal for revitalizing body and mind, delivering an extraordinary concentration of essential minerals.",
+          tasteProfile: "Intensely tangy, wild, fruity, and deeply refreshing.",
           ingredients: [
             "Wild Maad fruit pulp (Saba senegalensis)",
             "Pure spring water",
             "Natural cane sugar",
-            "Pinch of traditional sea salt"
+            "Pinch of sea salt"
           ],
           healthBenefits: [
             "Rich in Vitamin C",
-            "Vitamins B6 & B3",
+            "Vitamines B6 & B3",
             "Calcium Source (Ca)",
-            "Rich in Magnesium (Mg)"
+            "Rich in Magnesium (Mg)",
+            "Natural Body Tonic"
           ],
-          image: "/assets/juice_cinematic.png",
+          image: "/assets/flyer_maad.jpg",
           color: "from-amber-500 to-orange-700",
           badge: "Wild Treasure ($15)"
         },
@@ -422,50 +504,128 @@ const copy = {
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "Crisp garden peppermint seamlessly blended with silky milk, evoking the delight of artisanal mint ice cream.",
-          longDescription: "A comforting and refreshing creation combining hand-picked peppermint with smooth milk. It offers an ice-cream-like delicacy that cools the throat and soothes digestion.",
-          tasteProfile: "Fresh, milky, velvety with light mint ice cream notes.",
+          description: "A fresh, velvety, and deliciously unique drink evoking the taste of artisanal mint ice cream!",
+          longDescription: "A gourmet creation prepared with fresh mint leaves and creamy milk. Perfectly suitable for adults and children, offering a refreshing milky coolness and digestive comfort.",
+          tasteProfile: "Fresh, milky, velvety with mint ice cream notes.",
           ingredients: [
-            "Fresh peppermint leaves",
-            "Creamy whole milk",
+            "Fresh natural peppermint",
+            "Smooth whole milk",
             "Artisanal mint syrup",
-            "Natural vanilla extract"
+            "Touch of vanilla"
           ],
           healthBenefits: [
-            "Soothing Digestion",
-            "Intense Cooling",
-            "Velvety Milk Comfort"
+            "Optimal digestion",
+            "Oral health support",
+            "Calm & concentration",
+            "Respiratory & bone health"
           ],
-          image: "/assets/juice_diabolo_menthe.png",
+          image: "/assets/flyer_diabolo_menthe.jpg",
           color: "from-emerald-400 to-teal-600",
-          badge: "Ice Cream Delight"
+          badge: "Ice Cream Delight ($12)"
         },
         {
           id: "bouye",
           name: "Pure Baobab (Bouye)",
-          tagline: "100% Natural Monkey Bread",
+          tagline: "Iconic African Baobab Fruit",
           price: 12,
           formattedPrice: "$12",
           volume: "1L",
-          description: "The authentic traditional African Baobab nectar in its purest form, an extraordinary superfood packed with fibers.",
-          longDescription: "A symbol of health and longevity in Africa, the Baobab tree yields the sacred Monkey Bread fruit. This traditionally prepared nectar provides a smooth, satisfying texture packed with prebiotic fiber and fortifying nutrients.",
-          tasteProfile: "Smooth, sweet, delicately tangy with a rich velvety body.",
+          description: "Inside its woody shell lies naturally sweet and tangy pulp. An extraordinary superfood.",
+          longDescription: "A symbol of health and longevity in Africa, the baobab fruit (monkey bread) yields an incomparably smooth, velvety texture packed with prebiotic fibers, vitamins, and fortifying minerals.",
+          tasteProfile: "Smooth, sweet, velvety with delicate tangy hints.",
           ingredients: [
-            "100% Natural Baobab pulp (Monkey bread)",
+            "100% Pure Baobab pulp (Monkey bread)",
             "Pure spring water",
-            "Sweet light milk",
-            "Raw cane sugar",
-            "Natural orange blossom scent"
+            "Sweet milk",
+            "Raw cane sugar"
           ],
           healthBenefits: [
-            "Natural Prebiotic",
-            "Rich in Fibers",
-            "Immune System Boost",
-            "Vitality & Strength"
+            "Rich in Vitamin C",
+            "Helps fight gastroenteritis",
+            "Rich in minerals & fiber",
+            "Natural prebiotic booster"
           ],
-          image: "/assets/juice_bouye_passion.png",
-          color: "from-amber-200 to-orange-400",
-          badge: "100% Natural"
+          image: "/assets/flyer_bouye.jpg",
+          color: "from-amber-300 to-orange-500",
+          badge: "100% Natural ($12)"
+        },
+        {
+          id: "hibiscus-bissap",
+          name: "Hibiscus / Bissap",
+          tagline: "Natural, Refreshing, Healing",
+          price: 10,
+          formattedPrice: "$10",
+          volume: "1L",
+          description: "Ruby-red infusion packed with powerful antioxidants, thirst-quenching, and beneficial for heart health.",
+          longDescription: "Our Hibiscus (Bissap) juice is a pure artisanal infusion of tropical hibiscus flowers. Naturally refreshing, renowned for its cardiovascular benefits and exceptional antioxidant action.",
+          tasteProfile: "Tangy, floral, deeply thirst-quenching with red fruit notes.",
+          ingredients: [
+            "Fresh hibiscus flowers (Bissap)",
+            "Pure spring water",
+            "Organic cane sugar",
+            "Fresh mint leaves"
+          ],
+          healthBenefits: [
+            "Powerful Antioxidant",
+            "Hydrating & Thirst-quenching",
+            "Cardiovascular support",
+            "100% Natural & healing"
+          ],
+          image: "/assets/flyer_hibiscus_bissap.jpg",
+          color: "from-red-600 to-rose-900",
+          badge: "Super Antioxidant ($10)"
+        },
+        {
+          id: "corossol",
+          name: "Soursop (Corossol)",
+          tagline: "Exotic, Sweet & Creamy",
+          price: 15,
+          formattedPrice: "$15",
+          volume: "1L",
+          description: "Exceptional nectar crafted from ripe soursop fruit, naturally rich in Vitamin C and antioxidants.",
+          longDescription: "Extracted from ripe tropical soursop fruit (Annona muricata), this creamy juice boosts the immune system, regulates digestive transit with plant fiber, and helps soothe daily stress.",
+          tasteProfile: "Creamy, sweet, velvety with exotic notes of strawberry and citrus.",
+          ingredients: [
+            "Fresh Soursop pulp (Corossol)",
+            "Pure spring water",
+            "Natural cane sugar",
+            "Lime juice"
+          ],
+          healthBenefits: [
+            "Immune system booster",
+            "Rich in Vitamin C & antioxidants",
+            "Fiber-rich transit support",
+            "Stress & blood sugar balance"
+          ],
+          image: "/assets/flyer_corossol.jpg",
+          color: "from-lime-600 to-emerald-800",
+          badge: "Exotic Smoothie ($15)"
+        },
+        {
+          id: "ditax",
+          name: "Ditax",
+          tagline: "100% Natural & Authentic",
+          price: 15,
+          formattedPrice: "$15",
+          volume: "1L",
+          description: "Juice from the wild Ditax fruit, finely strained for a silky, fiber-free texture with naturally low sugar.",
+          longDescription: "Ditax (Detarium senegalense) is a prized wild fruit from West Africa. Our juice is meticulously strained to deliver a smooth, velvety nectar guaranteed fresh with therapeutic and anti-inflammatory properties.",
+          tasteProfile: "Unique, tangy, herbal, and deeply refreshing.",
+          ingredients: [
+            "Natural Ditax fruit pulp",
+            "Pure spring water",
+            "Light natural sugar",
+            "Lemon juice"
+          ],
+          healthBenefits: [
+            "Rich in Vitamin C",
+            "High antioxidant power",
+            "Facilitates digestion",
+            "Anti-inflammatory virtues"
+          ],
+          image: "/assets/flyer_ditax.jpg",
+          color: "from-green-600 to-emerald-900",
+          badge: "Wild Super-Fruit ($15)"
         }
       ] as JuiceItem[],
     },
