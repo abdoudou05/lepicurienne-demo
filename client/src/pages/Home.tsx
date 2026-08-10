@@ -1130,82 +1130,58 @@ export default function Home() {
                 onClick={() => setSelectedJuice(juice)}
                 role="button"
                 tabIndex={0}
-                aria-label={`Découvrir le jus ${juice.name} (${juice.formattedPrice}) - ${juice.tagline}`}
+                aria-label={`Découvrir le jus ${juice.name} (${juice.formattedPrice})`}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     setSelectedJuice(juice);
                   }
                 }}
-                className="group relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden glass-card shadow-[0_10px_30px_rgba(0,0,0,0.8)] md:shadow-[0_20px_40px_rgba(0,0,0,0.8)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
+                className="group relative rounded-[2rem] overflow-hidden glass-card border border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.8)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 hover:border-primary/40 transition-all duration-500 bg-[#060606] flex flex-col"
               >
-                <div className="aspect-[4/5] overflow-hidden relative">
+                {/* Pristine Flyer Image View */}
+                <div className="aspect-[4/5] overflow-hidden relative w-full bg-black">
                   <img
                     src={juice.image}
                     alt={juice.name}
-                    className="w-full h-full object-cover group-hover:scale-105 md:group-hover:scale-110 transition-transform duration-1000 ease-out"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${juice.color} mix-blend-multiply opacity-50`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
                   {/* Floating Volume Badge (1L) */}
                   <div className="absolute top-4 left-4 z-20">
-                    <Badge className="bg-black/70 text-white border border-white/20 backdrop-blur-md px-3 py-1 font-semibold text-xs">
+                    <Badge className="bg-black/80 text-white border border-white/20 backdrop-blur-md px-3 py-1 font-semibold text-xs">
                       {juice.volume}
                     </Badge>
                   </div>
 
-                  {/* Floating Price Badge ($12 / $15) */}
+                  {/* Floating Price Badge ($10 / $12 / $15) */}
                   <div className="absolute top-4 right-4 z-20">
                     <Badge className="bg-primary text-black font-bold text-sm px-3.5 py-1 shadow-lg shadow-primary/30 border-none">
                       {juice.formattedPrice}
                     </Badge>
                   </div>
-
-                  <div className="absolute inset-3 md:inset-4 border border-white/10 rounded-[1.5rem] md:rounded-[2rem] z-10 pointer-events-none group-hover:border-primary/30 transition-colors duration-700 hidden md:block" />
                 </div>
 
-                <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 z-20 text-center md:text-left flex flex-col justify-end">
-                  <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-primary block mb-1">
-                    {juice.tagline}
-                  </span>
-
-                  <h4 className="text-2xl md:text-3xl font-serif text-white mb-2">{juice.name}</h4>
-
-                  <p className="text-white/70 text-xs md:text-sm leading-relaxed mb-3 font-light line-clamp-2">
-                    {juice.description}
-                  </p>
-
-                  {/* Interactive Health Benefit Pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-4 justify-center md:justify-start">
-                    {juice.healthBenefits.map((benefit) => (
-                      <Badge
-                        key={benefit}
-                        variant="outline"
-                        role="button"
-                        aria-label={`Bienfait santé : ${benefit} pour ${juice.name}`}
-                        className="bg-primary/10 text-primary border-primary/30 text-[10px] md:text-[11px] font-medium py-1 px-2.5 hover:bg-primary/20 transition-colors cursor-pointer min-h-[36px] sm:min-h-[44px] inline-flex items-center justify-center"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedJuice(juice);
-                        }}
-                      >
-                        <Sparkles className="w-3 h-3 mr-1 text-primary shrink-0" />
-                        {benefit}
-                      </Badge>
-                    ))}
+                {/* Clean Card Footer Bar */}
+                <div className="p-5 md:p-6 bg-[#080808] border-t border-white/10 flex items-center justify-between gap-3 group-hover:bg-[#0c0c0c] transition-colors">
+                  <div className="min-w-0 text-left">
+                    <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-primary block truncate mb-0.5">
+                      {juice.tagline}
+                    </span>
+                    <h4 className="text-xl font-serif text-white font-medium truncate">{juice.name}</h4>
                   </div>
 
                   <button
                     type="button"
-                    aria-label={`Découvrir et commander ${juice.name} (${juice.formattedPrice})`}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedJuice(juice);
                     }}
-                    className="inline-flex items-center text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary hover:text-white transition-colors group/link justify-center md:justify-start cursor-pointer min-h-[44px] py-2"
+                    aria-label={`Voir la fiche détaillée de ${juice.name}`}
+                    className="shrink-0 bg-primary/10 hover:bg-primary hover:text-black text-primary border border-primary/30 text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl transition-all duration-300 flex items-center gap-1.5 min-h-[44px]"
                   >
-                    Découvrir & commander <ArrowRight className="w-3.5 h-3.5 ml-2 transform group-hover/link:translate-x-1.5 transition-transform" />
+                    <span>Détails</span> <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </motion.article>
