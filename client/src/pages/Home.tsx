@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { JuiceItem } from "@/types/product";
 import { JuiceDetailModal } from "@/components/JuiceDetailModal";
 import { SmartOrderModal } from "@/components/SmartOrderModal";
+import { LegalModal } from "@/components/LegalModal";
 import { Badge } from "@/components/ui/badge";
 
 type Language = "fr" | "en";
@@ -821,6 +822,8 @@ export default function Home() {
   const [selectedJuice, setSelectedJuice] = useState<JuiceItem | null>(null);
   const [orderModalOpen, setOrderModalOpen] = useState(false);
   const [orderJuice, setOrderJuice] = useState<JuiceItem | null>(null);
+  const [legalModalOpen, setLegalModalOpen] = useState(false);
+  const [legalTab, setLegalTab] = useState<"legal" | "privacy">("legal");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -1437,9 +1440,27 @@ export default function Home() {
                 </a>
               </span>
             </p>
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-white/30 text-[10px] md:text-xs">
-              <a href="#" aria-label="Mentions légales" className="hover:text-white transition-colors min-h-[44px] inline-flex items-center">{t.footer.legal}</a>
-              <a href="#" aria-label="Politique de confidentialité" className="hover:text-white transition-colors min-h-[44px] inline-flex items-center">{t.footer.privacy}</a>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-white/40 text-[10px] md:text-xs">
+              <button
+                type="button"
+                onClick={() => {
+                  setLegalTab("legal");
+                  setLegalModalOpen(true);
+                }}
+                className="hover:text-primary transition-colors min-h-[44px] inline-flex items-center cursor-pointer"
+              >
+                {t.footer.legal}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setLegalTab("privacy");
+                  setLegalModalOpen(true);
+                }}
+                className="hover:text-primary transition-colors min-h-[44px] inline-flex items-center cursor-pointer"
+              >
+                {t.footer.privacy}
+              </button>
             </div>
           </div>
         </div>
@@ -1457,6 +1478,13 @@ export default function Home() {
         onClose={() => setOrderModalOpen(false)}
         initialJuice={orderJuice}
         allJuices={t.flavors.juices}
+        language={language}
+      />
+
+      <LegalModal
+        open={legalModalOpen}
+        onClose={() => setLegalModalOpen(false)}
+        initialTab={legalTab}
         language={language}
       />
     </div>

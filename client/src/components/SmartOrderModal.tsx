@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { JuiceItem } from "@/types/product";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerClose } from "@/components/ui/drawer";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Minus, Trash2, ShoppingBag, Phone, MessageSquare, Mail, MapPin, CheckCircle2, X, ArrowRight, Truck } from "lucide-react";
+import { Plus, Minus, ShoppingBag, Phone, MessageSquare, Mail, MapPin, X, Truck, ShieldCheck, AlertCircle } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { toast } from "sonner";
 
 interface CartItem {
   juice: JuiceItem;
@@ -19,6 +20,13 @@ interface SmartOrderModalProps {
   language: "fr" | "en";
 }
 
+interface FormErrors {
+  name?: string;
+  phone?: string;
+  address?: string;
+  cart?: string;
+}
+
 export function SmartOrderModal({ open, onClose, initialJuice, allJuices, language }: SmartOrderModalProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -27,12 +35,13 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [notes, setNotes] = useState("");
-  const [orderSent, setOrderSent] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (initialJuice && open) {
       setCart([{ juice: initialJuice, quantity: 1 }]);
-      setOrderSent(false);
+      setErrors({});
     }
   }, [initialJuice, open]);
 
@@ -48,6 +57,9 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
         })
         .filter(Boolean) as CartItem[]
     );
+    if (errors.cart) {
+      setErrors((prev) => ({ ...prev, cart: undefined }));
+    }
   };
 
   const addJuiceToCart = (juice: JuiceItem) => {
@@ -60,33 +72,75 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
       }
       return [...prev, { juice, quantity: 1 }];
     });
+    if (errors.cart) {
+      setErrors((prev) => ({ ...prev, cart: undefined }));
+    }
   };
 
   const totalPrice = cart.reduce((sum, item) => sum + item.juice.price * item.quantity, 0);
 
-  const formatOrderSummaryText = () => {
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (cart.length === 0) {
+      newErrors.cart = language === "fr" ? "Votre panier est vide. Veuillez sélectionner au moins une bouteille." : "Your basket is empty. Please select at least one bottle.";
+    }
+
+    if (!customerName.trim() || customerName.trim().length < 2) {
+      newErrors.name = language === "fr" ? "Veuillez indiquer votre nom complet (au moins 2 caractères)." : "Please enter your full name (at least 2 characters).";
+    }
+
+    // Phone validation (digits check)
+    const phoneDigits = customerPhone.replace(/\D/g, "");
+    if (!customerPhone.trim() || phoneDigits.length < 10) {
+      newErrors.phone = language === "fr" ? "Veuillez entrer un numéro de téléphone valide à 10 chiffres (ex: 819-448-3630)." : "Please enter a valid 10-digit phone number.";
+    }
+
+    if (fulfillment === "delivery" && (!customerAddress.trim() || customerAddress.trim().length < 5)) {
+      newErrors.address = language === "fr" ? "Veuillez saisir une adresse de livraison valide à Québec." : "Please enter a valid delivery address in Quebec.";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      const firstMsg = Object.values(newErrors)[0];
+      toast.error(firstMsg);
+      return false;
+    }
+
+    return true;
+  };
+
+  const executeOrderSubmission = (channel: "sms" | "whatsapp" | "email") => {
+    if (isSubmitting) return;
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
     const itemsList = cart.map((i) => `• ${i.quantity}x ${i.juice.name} (1L) - $${i.juice.price * i.quantity}`).join("\n");
-    const optionText = fulfillment === "pickup" ? "Cueillette sur place (3037 Rue de la Forêt App 26, Québec)" : `Livraison à : ${customerAddress || "Adresse à préciser"}`;
-    return `Bonjour L'Épicurienne By Waycha,\n\nJe souhaite passer une commande :\n${itemsList}\n\nTotal: $${totalPrice} CAD\nOption: ${optionText}\nClient: ${customerName || "Anonyme"} (${customerPhone || "Téléphone non fourni"})\n${notes ? `Note: ${notes}` : ""}`;
-  };
+    const optionText = fulfillment === "pickup" ? "Cueillette gratuite sur place (3037 Rue de la Forêt App 26, Québec)" : `Livraison à domicile : ${customerAddress}`;
+    const orderSummary = `Bonjour L'Épicurienne By Waycha,\n\nJe souhaite valider ma commande de jus :\n${itemsList}\n\nTotal: $${totalPrice} CAD\nOption: ${optionText}\nClient: ${customerName}\nTéléphone: ${customerPhone}\n${notes ? `Note: ${notes}` : ""}`;
 
-  const handleSmsOrder = () => {
-    const text = encodeURIComponent(formatOrderSummaryText());
-    window.location.href = `sms:8194483630?body=${text}`;
-    setOrderSent(true);
-  };
+    toast.success(language === "fr" ? "Commande validée ! Redirection en cours..." : "Order verified! Redirecting...");
 
-  const handleWhatsAppOrder = () => {
-    const text = encodeURIComponent(formatOrderSummaryText());
-    window.open(`https://wa.me/18194483630?text=${text}`, "_blank");
-    setOrderSent(true);
-  };
+    if (channel === "sms") {
+      const text = encodeURIComponent(orderSummary);
+      window.location.href = `sms:8194483630?body=${text}`;
+    } else if (channel === "whatsapp") {
+      const text = encodeURIComponent(orderSummary);
+      window.open(`https://wa.me/18194483630?text=${text}`, "_blank");
+    } else if (channel === "email") {
+      const subject = encodeURIComponent(`Nouvelle Commande Jus - ${customerName}`);
+      const body = encodeURIComponent(orderSummary);
+      window.location.href = `mailto:lepicuriennebywaycha@gmail.com?subject=${subject}&body=${body}`;
+    }
 
-  const handleEmailOrder = () => {
-    const subject = encodeURIComponent(`Nouvelle Commande Jus - ${customerName || "Client"}`);
-    const body = encodeURIComponent(formatOrderSummaryText());
-    window.location.href = `mailto:lepicuriennebywaycha@gmail.com?subject=${subject}&body=${body}`;
-    setOrderSent(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+    }, 3000);
   };
 
   const contentUI = (
@@ -99,10 +153,10 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
           </div>
           <div>
             <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-primary block">
-              {language === "fr" ? "Commande Express & Directe" : "Direct & Express Order"}
+              {language === "fr" ? "Commande Sécurisée & Envoi Direct" : "Secure Order & Direct Submission"}
             </span>
             <h3 className="text-xl font-serif text-white font-medium">
-              {language === "fr" ? "Votre Panier de Nectars" : "Your Juice Basket"}
+              {language === "fr" ? "Votre Commande de Nectars" : "Your Juice Basket"}
             </h3>
           </div>
         </div>
@@ -122,13 +176,20 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
         {/* Cart Items List */}
         <div>
           <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-3 flex items-center justify-between">
-            <span>{language === "fr" ? "Produits Sélectionnés" : "Selected Items"}</span>
-            <span className="text-primary font-serif text-sm">${totalPrice} CAD</span>
+            <span>{language === "fr" ? "1. Vos Boissons Sélectionnées" : "1. Selected Drinks"}</span>
+            <span className="text-primary font-serif text-sm font-bold">${totalPrice} CAD</span>
           </h4>
+
+          {errors.cart && (
+            <div className="mb-3 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>{errors.cart}</span>
+            </div>
+          )}
 
           {cart.length === 0 ? (
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 text-center text-white/60 text-sm">
-              {language === "fr" ? "Votre panier est vide. Veuillez sélectionner un jus." : "Your basket is empty. Please select a juice."}
+              {language === "fr" ? "Votre panier est vide. Veuillez sélectionner un jus ci-dessous." : "Your basket is empty. Please select a juice below."}
             </div>
           ) : (
             <div className="space-y-3">
@@ -147,7 +208,7 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
                     <button
                       type="button"
                       onClick={() => updateQuantity(juice.id, -1)}
-                      className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                      className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
                       aria-label="Réduire quantité"
                     >
                       <Minus className="w-3.5 h-3.5" />
@@ -156,7 +217,7 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
                     <button
                       type="button"
                       onClick={() => updateQuantity(juice.id, 1)}
-                      className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+                      className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
                       aria-label="Augmenter quantité"
                     >
                       <Plus className="w-3.5 h-3.5" />
@@ -170,8 +231,8 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
 
         {/* Add More Juices Quick Selector */}
         <div>
-          <span className="text-xs font-bold text-white uppercase tracking-wider block mb-2">
-            {language === "fr" ? "+ Ajouter un autre jus à la commande" : "+ Add another juice to order"}
+          <span className="text-xs font-bold text-white/80 uppercase tracking-wider block mb-2">
+            {language === "fr" ? "+ Ajouter une autre bouteille" : "+ Add another bottle"}
           </span>
           <div className="flex flex-wrap gap-2">
             {allJuices
@@ -181,7 +242,7 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
                   key={j.id}
                   type="button"
                   onClick={() => addJuiceToCart(j)}
-                  className="text-xs bg-white/[0.05] hover:bg-primary/20 hover:border-primary/40 border border-white/10 px-3 py-1.5 rounded-xl text-white/80 transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="text-xs bg-white/[0.05] hover:bg-primary/20 hover:border-primary/40 border border-white/10 px-3 py-1.5 rounded-xl text-white/80 transition-colors flex items-center gap-1.5 cursor-pointer min-h-[36px]"
                 >
                   <Plus className="w-3 h-3 text-primary" />
                   {j.name} (${j.price})
@@ -193,12 +254,15 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
         {/* Fulfillment Choice (Pickup vs Delivery) */}
         <div>
           <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-2.5">
-            {language === "fr" ? "Mode de Récupération" : "Fulfillment Method"}
+            {language === "fr" ? "2. Mode de Récupération" : "2. Delivery / Pickup"}
           </h4>
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
-              onClick={() => setFulfillment("pickup")}
+              onClick={() => {
+                setFulfillment("pickup");
+                setErrors((prev) => ({ ...prev, address: undefined }));
+              }}
               className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
                 fulfillment === "pickup"
                   ? "bg-primary/15 border-primary text-white"
@@ -223,55 +287,93 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
             >
               <Truck className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <div>
-                <span className="text-xs font-bold block text-white">Livraison Local</span>
+                <span className="text-xs font-bold block text-white">Livraison Locale</span>
                 <span className="text-[11px] text-white/60 leading-tight block">Québec & environs</span>
               </div>
             </button>
           </div>
         </div>
 
-        {/* Customer Information Inputs */}
-        <div className="space-y-3">
+        {/* Customer Information Inputs with STRICT Validation */}
+        <div className="space-y-4 pt-2">
+          <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+            {language === "fr" ? "3. Vos Coordonnées (Obligatoires)" : "3. Customer Information (Required)"}
+          </h4>
+
+          {/* Name Field */}
           <div>
-            <label className="text-xs font-bold text-white/80 block mb-1 uppercase tracking-wider">
-              {language === "fr" ? "Votre Nom" : "Your Name"}
+            <label className="text-xs font-bold text-white/80 block mb-1 uppercase tracking-wider flex items-center justify-between">
+              <span>{language === "fr" ? "Votre Nom Complet *" : "Your Full Name *"}</span>
+              {errors.name && <span className="text-red-400 text-[11px] font-normal">{errors.name}</span>}
             </label>
             <input
               type="text"
+              required
               value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              placeholder="ex. Marie Diop"
-              className="w-full bg-white/[0.05] border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+              onChange={(e) => {
+                setCustomerName(e.target.value);
+                if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+              }}
+              placeholder="ex. Ndeye Diop"
+              className={`w-full bg-white/[0.05] border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none transition-colors ${
+                errors.name ? "border-red-500 bg-red-500/10 focus:border-red-400" : "border-white/15 focus:border-primary"
+              }`}
             />
           </div>
 
+          {/* Phone Field */}
           <div>
-            <label className="text-xs font-bold text-white/80 block mb-1 uppercase tracking-wider">
-              {language === "fr" ? "Numéro de Téléphone" : "Phone Number"}
+            <label className="text-xs font-bold text-white/80 block mb-1 uppercase tracking-wider flex items-center justify-between">
+              <span>{language === "fr" ? "Téléphone (10 chiffres) *" : "Phone Number *"}</span>
+              {errors.phone && <span className="text-red-400 text-[11px] font-normal">{errors.phone}</span>}
             </label>
             <input
               type="tel"
+              required
               value={customerPhone}
-              onChange={(e) => setCustomerPhone(e.target.value)}
-              placeholder="ex. 418-123-4567"
-              className="w-full bg-white/[0.05] border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+              onChange={(e) => {
+                setCustomerPhone(e.target.value);
+                if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
+              }}
+              placeholder="ex. 819-448-3630"
+              className={`w-full bg-white/[0.05] border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none transition-colors ${
+                errors.phone ? "border-red-500 bg-red-500/10 focus:border-red-400" : "border-white/15 focus:border-primary"
+              }`}
             />
           </div>
 
+          {/* Address Field if Delivery */}
           {fulfillment === "delivery" && (
             <div>
-              <label className="text-xs font-bold text-white/80 block mb-1 uppercase tracking-wider">
-                {language === "fr" ? "Adresse de Livraison" : "Delivery Address"}
+              <label className="text-xs font-bold text-white/80 block mb-1 uppercase tracking-wider flex items-center justify-between">
+                <span>{language === "fr" ? "Adresse de Livraison à Québec *" : "Delivery Address *"}</span>
+                {errors.address && <span className="text-red-400 text-[11px] font-normal">{errors.address}</span>}
               </label>
               <input
                 type="text"
+                required
                 value={customerAddress}
-                onChange={(e) => setCustomerAddress(e.target.value)}
-                placeholder="ex. 1234 Grande Allée E, Québec"
-                className="w-full bg-white/[0.05] border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                onChange={(e) => {
+                  setCustomerAddress(e.target.value);
+                  if (errors.address) setErrors((prev) => ({ ...prev, address: undefined }));
+                }}
+                placeholder="ex. 3037 Rue de la Forêt, Québec"
+                className={`w-full bg-white/[0.05] border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none transition-colors ${
+                  errors.address ? "border-red-500 bg-red-500/10 focus:border-red-400" : "border-white/15 focus:border-primary"
+                }`}
               />
             </div>
           )}
+
+          {/* Security & Data Protection Guarantee Badge */}
+          <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-3 text-xs text-white/60">
+            <ShieldCheck className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+            <p className="leading-relaxed">
+              {language === "fr"
+                ? "🔒 Vos données sont protégées (Loi 25 Québec). Elles sont utilisées uniquement par L'Épicurienne pour valider votre commande."
+                : "🔒 Your data is protected (Quebec Law 25). Used exclusively by L'Épicurienne to process your order."}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -283,11 +385,11 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {/* SMS / Mobile Direct Button */}
+          {/* SMS Direct Button */}
           <button
             type="button"
-            disabled={cart.length === 0}
-            onClick={handleSmsOrder}
+            disabled={isSubmitting}
+            onClick={() => executeOrderSubmission("sms")}
             className="w-full btn-cinematic justify-center text-xs py-3.5 flex items-center gap-2 cursor-pointer disabled:opacity-50 min-h-[44px]"
           >
             <MessageSquare className="w-4 h-4" />
@@ -297,8 +399,8 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
           {/* WhatsApp Direct Button */}
           <button
             type="button"
-            disabled={cart.length === 0}
-            onClick={handleWhatsAppOrder}
+            disabled={isSubmitting}
+            onClick={() => executeOrderSubmission("whatsapp")}
             className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-50 min-h-[44px]"
           >
             <Phone className="w-4 h-4" />
@@ -309,9 +411,9 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
         {/* Secondary Email Option */}
         <button
           type="button"
-          disabled={cart.length === 0}
-          onClick={handleEmailOrder}
-          className="w-full text-white/60 hover:text-white text-xs py-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+          disabled={isSubmitting}
+          onClick={() => executeOrderSubmission("email")}
+          className="w-full text-white/60 hover:text-white text-xs py-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer min-h-[36px]"
         >
           <Mail className="w-3.5 h-3.5" />
           Envoyer par Courriel (lepicuriennebywaycha@gmail.com)
@@ -323,7 +425,7 @@ export function SmartOrderModal({ open, onClose, initialJuice, allJuices, langua
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-        <DialogContent className="max-w-2xl h-[85vh] max-h-[750px] bg-[#080808] border border-primary/30 text-white rounded-3xl p-0 overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.95)] backdrop-blur-3xl [&>button]:hidden">
+        <DialogContent className="max-w-2xl h-[88vh] max-h-[780px] bg-[#080808] border border-primary/30 text-white rounded-3xl p-0 overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.95)] backdrop-blur-3xl [&>button]:hidden">
           {contentUI}
         </DialogContent>
       </Dialog>
