@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { JuiceItem } from "@/types/product";
 import { JuiceDetailModal } from "@/components/JuiceDetailModal";
+import { SmartOrderModal } from "@/components/SmartOrderModal";
 import { Badge } from "@/components/ui/badge";
 
 type Language = "fr" | "en";
@@ -818,12 +819,19 @@ const BespokeIcon = ({ children }: { children: React.ReactNode }) => (
 export default function Home() {
   const [language, setLanguage] = useState<Language>(getInitialLanguage);
   const [selectedJuice, setSelectedJuice] = useState<JuiceItem | null>(null);
+  const [orderModalOpen, setOrderModalOpen] = useState(false);
+  const [orderJuice, setOrderJuice] = useState<JuiceItem | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const yHero = useTransform(scrollY, [0, 1000], [0, 300]);
   const yStoryImage = useTransform(scrollY, [0, 2000], [0, -100]);
   const t = copy[language];
+
+  const handleOpenOrder = (juice: JuiceItem) => {
+    setOrderJuice(juice);
+    setOrderModalOpen(true);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1164,25 +1172,39 @@ export default function Home() {
                 </div>
 
                 {/* Clean Card Footer Bar */}
-                <div className="p-5 md:p-6 bg-[#080808] border-t border-white/10 flex items-center justify-between gap-3 group-hover:bg-[#0c0c0c] transition-colors">
+                <div className="p-4 sm:p-5 bg-[#080808] border-t border-white/10 flex items-center justify-between gap-2 group-hover:bg-[#0c0c0c] transition-colors">
                   <div className="min-w-0 text-left">
-                    <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-primary block truncate mb-0.5">
+                    <span className="text-[10px] uppercase font-bold tracking-[0.18em] text-primary block truncate mb-0.5">
                       {juice.tagline}
                     </span>
-                    <h4 className="text-xl font-serif text-white font-medium truncate">{juice.name}</h4>
+                    <h4 className="text-base sm:text-lg font-serif text-white font-medium truncate">{juice.name}</h4>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedJuice(juice);
-                    }}
-                    aria-label={`Voir la fiche détaillée de ${juice.name}`}
-                    className="shrink-0 bg-primary/10 hover:bg-primary hover:text-black text-primary border border-primary/30 text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl transition-all duration-300 flex items-center gap-1.5 min-h-[44px]"
-                  >
-                    <span>Détails</span> <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedJuice(juice);
+                      }}
+                      aria-label={`Fiche de ${juice.name}`}
+                      className="bg-white/5 hover:bg-white/15 text-white/80 border border-white/10 text-[11px] font-semibold uppercase tracking-wider py-2 px-3 rounded-xl transition-all min-h-[40px] flex items-center cursor-pointer"
+                    >
+                      Détails
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenOrder(juice);
+                      }}
+                      aria-label={`Commander ${juice.name}`}
+                      className="bg-primary hover:bg-primary/90 text-black font-bold text-xs py-2 px-3 rounded-xl transition-all shadow-md shadow-primary/20 min-h-[40px] flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>Commander</span> <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               </motion.article>
             ))}
@@ -1426,7 +1448,16 @@ export default function Home() {
       <JuiceDetailModal
         juice={selectedJuice}
         onClose={() => setSelectedJuice(null)}
+        onOrderClick={handleOpenOrder}
         orderCtaText={t.flavors.orderCta}
+      />
+
+      <SmartOrderModal
+        open={orderModalOpen}
+        onClose={() => setOrderModalOpen(false)}
+        initialJuice={orderJuice}
+        allJuices={t.flavors.juices}
+        language={language}
       />
     </div>
   );

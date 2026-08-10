@@ -9,20 +9,18 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 interface JuiceDetailModalProps {
   juice: JuiceItem | null;
   onClose: () => void;
+  onOrderClick: (juice: JuiceItem) => void;
   orderCtaText: string;
 }
 
-export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailModalProps) {
+export function JuiceDetailModal({ juice, onClose, onOrderClick, orderCtaText }: JuiceDetailModalProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (!juice) return null;
 
-  const handleOrderClick = () => {
+  const handleOrder = () => {
     onClose();
-    setTimeout(() => {
-      const contactSection = document.getElementById("contact");
-      contactSection?.scrollIntoView({ behavior: "smooth" });
-    }, 150);
+    onOrderClick(juice);
   };
 
   if (isDesktop) {
@@ -31,7 +29,7 @@ export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailMo
         <DialogContent className="max-w-5xl h-[88vh] max-h-[720px] bg-[#060606] border border-primary/30 text-white rounded-3xl p-0 overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.95)] backdrop-blur-3xl flex flex-col [&>button]:hidden">
           <div className="grid grid-cols-12 h-full w-full overflow-hidden">
             {/* Left Column: Large Readable Flyer View */}
-            <div className="col-span-5 relative h-full bg-gradient-to-b from-black via-[#0a0a0a] to-black p-4 flex items-center justify-center border-r border-white/10 overflow-hidden">
+            <div className="col-span-5 relative h-full bg-gradient-to-b from-black via-[#0a0a0a] to-black p-4 flex items-center justify-center border-r border-white/10 overflow-hidden min-w-0">
               {/* Floating Badges */}
               <div className="absolute top-4 left-4 z-20">
                 <Badge className="bg-black/80 text-white border border-white/20 backdrop-blur-md px-3 py-1 font-semibold text-xs shadow-md">
@@ -55,15 +53,15 @@ export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailMo
             </div>
 
             {/* Right Column: Structured Details & Sticky CTA */}
-            <div className="col-span-7 h-full flex flex-col justify-between bg-[#0a0a0a] p-6 lg:p-8 overflow-hidden relative">
+            <div className="col-span-7 h-full flex flex-col justify-between bg-[#0a0a0a] p-6 lg:p-8 overflow-hidden relative min-w-0">
               {/* Custom Top Header & Close Button */}
               <div className="flex items-start justify-between gap-4 pb-3 border-b border-white/10 shrink-0">
-                <div>
-                  <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-primary flex items-center gap-1.5 mb-1">
-                    <Leaf className="w-3.5 h-3.5" />
+                <div className="min-w-0 pr-2">
+                  <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-primary flex items-center gap-1.5 mb-1 truncate">
+                    <Leaf className="w-3.5 h-3.5 shrink-0" />
                     {juice.tagline}
                   </span>
-                  <DialogTitle className="text-3xl font-serif text-white font-normal leading-tight">
+                  <DialogTitle className="text-3xl font-serif text-white font-normal leading-tight truncate">
                     {juice.name}
                   </DialogTitle>
                 </div>
@@ -93,17 +91,17 @@ export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailMo
                   </div>
                 </div>
 
-                {/* Health Benefits */}
+                {/* Health Benefits - Clean Non-Colliding Layout */}
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
                     <HeartPulse className="w-4 h-4 text-primary shrink-0" />
                     <h4 className="text-xs font-bold text-white uppercase tracking-wider">Bienfaits Santé Exceptionnels</h4>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="flex flex-col gap-2.5">
                     {juice.healthBenefits.map((benefit) => (
-                      <div key={benefit} className="bg-primary/10 border border-primary/25 text-primary text-xs py-2 px-3 rounded-xl flex items-center gap-2">
-                        <Sparkles className="w-3.5 h-3.5 text-primary shrink-0" />
-                        <span className="font-medium leading-tight">{benefit}</span>
+                      <div key={benefit} className="bg-primary/10 border border-primary/25 text-primary text-xs p-3 rounded-xl flex items-start gap-2.5 w-full min-w-0">
+                        <Sparkles className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        <span className="font-medium leading-snug break-words shrink min-w-0">{benefit}</span>
                       </div>
                     ))}
                   </div>
@@ -114,7 +112,7 @@ export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailMo
                   <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-2">Ingrédients 100% Naturels</h4>
                   <div className="flex flex-wrap gap-1.5">
                     {juice.ingredients.map((ing) => (
-                      <span key={ing} className="text-xs bg-white/[0.05] border border-white/10 px-2.5 py-1 rounded-lg text-white/80 flex items-center gap-1.5">
+                      <span key={ing} className="text-xs bg-white/[0.05] border border-white/10 px-3 py-1.5 rounded-lg text-white/80 flex items-center gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
                         {ing}
                       </span>
@@ -127,7 +125,7 @@ export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailMo
               <div className="pt-4 border-t border-white/10 bg-[#0a0a0a] z-20 shrink-0">
                 <button
                   type="button"
-                  onClick={handleOrderClick}
+                  onClick={handleOrder}
                   aria-label={`Commander ${juice.name} (${juice.formattedPrice})`}
                   className="w-full btn-cinematic justify-center text-sm py-4 flex items-center gap-2 cursor-pointer min-h-[48px] shadow-lg shadow-primary/20"
                 >
@@ -197,17 +195,17 @@ export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailMo
             </div>
           </div>
 
-          {/* Health Benefits */}
+          {/* Health Benefits - Clean Mobile Layout */}
           <div>
             <div className="flex items-center gap-2 mb-2.5">
               <HeartPulse className="w-4 h-4 text-primary shrink-0" />
               <h4 className="text-xs font-bold text-white uppercase tracking-wider">Bienfaits Santé</h4>
             </div>
-            <div className="grid grid-cols-1 gap-2">
+            <div className="flex flex-col gap-2">
               {juice.healthBenefits.map((b) => (
-                <div key={b} className="bg-primary/10 border border-primary/30 text-primary text-xs py-2 px-3 rounded-xl flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-primary shrink-0" />
-                  <span className="font-medium">{b}</span>
+                <div key={b} className="bg-primary/10 border border-primary/30 text-primary text-xs p-3 rounded-xl flex items-start gap-2.5 w-full min-w-0">
+                  <Sparkles className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                  <span className="font-medium leading-snug break-words shrink min-w-0">{b}</span>
                 </div>
               ))}
             </div>
@@ -231,7 +229,7 @@ export function JuiceDetailModal({ juice, onClose, orderCtaText }: JuiceDetailMo
         <div className="p-4 border-t border-white/10 bg-[#080808] shrink-0 z-20">
           <button
             type="button"
-            onClick={handleOrderClick}
+            onClick={handleOrder}
             aria-label={`Commander ${juice.name} (${juice.formattedPrice})`}
             className="w-full btn-cinematic justify-center text-sm py-4 flex items-center gap-2 cursor-pointer min-h-[48px] shadow-lg shadow-primary/20"
           >
