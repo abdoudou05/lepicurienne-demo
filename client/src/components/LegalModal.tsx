@@ -146,8 +146,8 @@ export function LegalModal({ open, onClose, initialTab = "legal", language }: Le
               </div>
               <p className="text-white/90 font-light leading-relaxed">
                 {language === "fr"
-                  ? "Conformément à la Loi 25 du Québec sur la protection des renseignements personnels, nous traitons vos données personnelles avec la plus stricte confidentialité. Aucune donnée n'est revendue ni partagée à des tiers."
-                  : "In accordance with Quebec Law 25 on personal information protection, we process your personal data with strict confidentiality. No data is ever sold or shared with third parties."}
+                  ? "Conformément à la Loi 25 du Québec sur la protection des renseignements personnels, nous traitons vos données personnelles avec la plus stricte confidentialité. Aucune donnée n'est revendue. Elle n'est communiquée qu'aux fournisseurs nécessaires au fonctionnement du site (voir section 2)."
+                  : "In accordance with Quebec Law 25 on personal information protection, we process your personal data with strict confidentiality. No data is ever sold. It is shared only with the providers needed to run the site (see section 2)."}
               </p>
             </section>
 
@@ -168,7 +168,18 @@ export function LegalModal({ open, onClose, initialTab = "legal", language }: Le
 
             <section className="space-y-2">
               <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-                {language === "fr" ? "2. Absence de Traçage Publicitaire" : "2. No Advertising Tracking"}
+                {language === "fr" ? "2. Formulaire de contact" : "2. Contact form"}
+              </h4>
+              <p>
+                {language === "fr"
+                  ? "Lorsque vous nous écrivez par le formulaire de contact, nous recevons votre nom, votre courriel, votre téléphone (facultatif) et votre message. Ces renseignements servent uniquement à répondre à votre demande. Ils nous sont transmis par courriel au moyen du service Resend et ne sont pas conservés sur le site. Une vérification anti-robot de Cloudflare (Turnstile) protège le formulaire contre les envois automatisés. Ces fournisseurs peuvent traiter les renseignements à l'extérieur du Québec. Pour toute question sur vos renseignements personnels, écrivez à lepicuriennebywaycha@gmail.com."
+                  : "When you write to us through the contact form, we receive your name, email, phone number (optional) and message. This information is used only to answer your request. It is sent to us by email through the Resend service and is not stored on the site. A Cloudflare anti-robot check (Turnstile) protects the form against automated submissions. These providers may process the information outside Québec. For any question about your personal information, write to lepicuriennebywaycha@gmail.com."}
+              </p>
+            </section>
+
+            <section className="space-y-2">
+              <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                {language === "fr" ? "3. Absence de Traçage Publicitaire" : "3. No Advertising Tracking"}
               </h4>
               <p>
                 Ce site n'utilise aucun cookie tiers à visée publicitaire ni aucun traqueur commercial. Seule la préférence linguistique (Français/Anglais) est enregistrée localement dans la mémoire de votre navigateur (`localStorage`) pour vous offrir un confort de visite optimal.
@@ -177,7 +188,7 @@ export function LegalModal({ open, onClose, initialTab = "legal", language }: Le
 
             <section className="space-y-2">
               <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-                {language === "fr" ? "3. Vos Droits & Modification" : "3. Your Rights & Modifications"}
+                {language === "fr" ? "4. Vos Droits & Modification" : "4. Your Rights & Modifications"}
               </h4>
               <p>
                 Vous bénéficiez à tout moment d'un droit d'accès, de rectification et de suppression de vos renseignements personnels. Pour toute demande liée à vos données, contactez-nous directement à : <strong>lepicuriennebywaycha@gmail.com</strong> ou au <strong>819-448-3630</strong>.

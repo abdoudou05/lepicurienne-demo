@@ -48,7 +48,7 @@ const organicParticles = Array.from({ length: 15 }, (_, index) => {
 const copy = {
   fr: {
     meta: {
-      title: "L'Épicurienne by Waycha — Jus exotiques, brunch & traiteur | Québec",
+      title: "L'Épicurienne by Waycha : Jus exotiques, brunch & traiteur | Québec",
       description:
         "Saveurs africaines authentiques, jus exotiques maison, brunch gourmand et service traiteur à Québec. L'Épicurienne by Waycha.",
       htmlLang: "fr-CA",
@@ -363,7 +363,7 @@ const copy = {
   },
   en: {
     meta: {
-      title: "L'Épicurienne by Waycha — Exotic Juices, Brunch & Catering | Québec",
+      title: "L'Épicurienne by Waycha: Exotic Juices, Brunch & Catering | Québec",
       description:
         "Authentic African flavors, house-made exotic juices, generous brunches, and elegant catering in Québec. L'Épicurienne by Waycha.",
       htmlLang: "en-CA",
