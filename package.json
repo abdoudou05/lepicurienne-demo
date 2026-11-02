@@ -10,7 +10,9 @@
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
-    "deploy:cloudflare": "npm run build && npx wrangler pages deploy dist/public"
+    "test": "node --test worker/contact.test.ts",
+    "deploy:preview": "npm run build && npx wrangler@4.149.0 deploy --env preview",
+    "deploy:cf": "npm run build && npx wrangler@4.149.0 deploy --env=\"\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -1,11 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Facebook, Globe2, Instagram, Mail, MapPin, Menu, Phone, Send, Sparkles, X } from "lucide-react";
+import { ArrowRight, Facebook, Globe2, Instagram, Mail, MapPin, Menu, Phone, Sparkles, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 import { JuiceItem } from "@/types/product";
 import { JuiceDetailModal } from "@/components/JuiceDetailModal";
 import { SmartOrderModal } from "@/components/SmartOrderModal";
 import { LegalModal } from "@/components/LegalModal";
+import { ContactForm } from "@/components/ContactForm";
 import { Badge } from "@/components/ui/badge";
 
 type Language = "fr" | "en";
@@ -338,14 +338,11 @@ const copy = {
     },
     contact: {
       heading: "Restons en Contact",
-      newsletterBody:
-        "Inscrivez-vous à notre newsletter pour découvrir nos nouvelles saveurs et offres exclusives.",
-      newsletterPlaceholder: "votre@email.com",
+      // Newsletter removed until the client picks a mailing-list tool: the old
+      // signup only showed a success toast and stored nothing (no fake signups).
+      intro:
+        "Une question, une commande spéciale ou un événement à planifier? Écrivez-nous, nous vous répondrons sous peu.",
       messageHeading: "Envoyer un Message",
-      namePlaceholder: "Votre nom",
-      emailPlaceholder: "Email",
-      messagePlaceholder: "Votre demande",
-      submitMessage: "Envoyer",
     },
     footer: {
       description:
@@ -359,10 +356,6 @@ const copy = {
       legal: "Mentions Légales",
       privacy: "Politique de Confidentialité",
       attributionPrefix: "Conçu avec passion par",
-    },
-    toasts: {
-      contact: "Votre message a été envoyé avec succès !",
-      newsletter: "Merci pour votre inscription à la newsletter !",
     },
     alt: {
       logo: "Logo L'Épicurienne By Waycha",
@@ -660,14 +653,9 @@ const copy = {
     },
     contact: {
       heading: "Let's Stay in Touch",
-      newsletterBody:
-        "Join our newsletter to discover new flavors, seasonal menus, and exclusive offers.",
-      newsletterPlaceholder: "your@email.com",
+      intro:
+        "A question, a special order or an event to plan? Write to us and we will get back to you shortly.",
       messageHeading: "Send a Message",
-      namePlaceholder: "Your name",
-      emailPlaceholder: "Email",
-      messagePlaceholder: "Your request",
-      submitMessage: "Send",
     },
     footer: {
       description:
@@ -681,10 +669,6 @@ const copy = {
       legal: "Legal Notice",
       privacy: "Privacy Policy",
       attributionPrefix: "Designed with passion by",
-    },
-    toasts: {
-      contact: "Your message has been sent successfully!",
-      newsletter: "Thank you for joining the newsletter!",
     },
     alt: {
       logo: "L'Épicurienne By Waycha logo",
@@ -855,16 +839,6 @@ export default function Home() {
     const description = document.querySelector('meta[name="description"]');
     description?.setAttribute("content", t.meta.description);
   }, [language, t.meta.description, t.meta.htmlLang, t.meta.title]);
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success(t.toasts.contact);
-  };
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success(t.toasts.newsletter);
-  };
 
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -1283,25 +1257,9 @@ export default function Home() {
               className="text-center md:text-left flex flex-col items-center md:items-start"
             >
               <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-6 md:mb-8">{t.contact.heading}</motion.h2>
-              <motion.p variants={fadeUp} className="text-white/50 text-base md:text-xl font-light max-w-md mb-8 md:mb-10 leading-relaxed">
-                {t.contact.newsletterBody}
+              <motion.p variants={fadeUp} className="text-white/50 text-base md:text-xl font-light max-w-md leading-relaxed">
+                {t.contact.intro}
               </motion.p>
-              <motion.form variants={fadeUp} onSubmit={handleNewsletterSubmit} className="relative w-full max-w-md mx-auto md:mx-0">
-                <input
-                  type="email"
-                  required
-                  aria-label="Adresse courriel pour l'infolettre"
-                  placeholder={t.contact.newsletterPlaceholder}
-                  className="w-full bg-white/[0.02] border border-white/10 rounded-full py-4 md:py-5 pl-6 md:pl-8 pr-16 text-white focus:outline-none focus:border-primary transition-colors placeholder:text-white/20 text-sm md:text-base min-h-[44px]"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1.5 top-1.5 bottom-1.5 w-11 h-11 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-colors cursor-pointer"
-                  aria-label={t.contact.submitMessage}
-                >
-                  <Send className="w-4 md:w-5 h-4 md:h-5 ml-[-2px]" />
-                </button>
-              </motion.form>
             </motion.div>
 
             <motion.div
@@ -1309,14 +1267,13 @@ export default function Home() {
               className="glass-card p-8 md:p-12 rounded-[2rem] md:rounded-[2.5rem] border border-white/5 w-full max-w-lg mx-auto"
             >
               <h3 className="text-2xl md:text-3xl font-serif text-white mb-6 md:mb-8 text-center md:text-left">{t.contact.messageHeading}</h3>
-              <form onSubmit={handleContactSubmit} className="space-y-4 md:space-y-5">
-                <input type="text" required aria-label="Votre nom complet" className="w-full px-5 md:px-6 py-4 md:py-5 bg-black/50 border border-white/10 rounded-xl md:rounded-2xl focus:outline-none focus:border-primary text-white placeholder:text-white/30 transition-colors text-sm md:text-base min-h-[44px]" placeholder={t.contact.namePlaceholder} />
-                <input type="email" required aria-label="Votre adresse courriel" className="w-full px-5 md:px-6 py-4 md:py-5 bg-black/50 border border-white/10 rounded-xl md:rounded-2xl focus:outline-none focus:border-primary text-white placeholder:text-white/30 transition-colors text-sm md:text-base min-h-[44px]" placeholder={t.contact.emailPlaceholder} />
-                <textarea required rows={4} aria-label="Votre message ou demande" className="w-full px-5 md:px-6 py-4 md:py-5 bg-black/50 border border-white/10 rounded-xl md:rounded-2xl focus:outline-none focus:border-primary text-white placeholder:text-white/30 transition-colors resize-none text-sm md:text-base min-h-[80px]" placeholder={t.contact.messagePlaceholder} />
-                <button type="submit" aria-label="Envoyer le formulaire de contact" className="w-full btn-cinematic mt-2 text-sm md:text-base py-4 min-h-[44px] flex items-center justify-center cursor-pointer">
-                  {t.contact.submitMessage}
-                </button>
-              </form>
+              <ContactForm
+                language={language}
+                onOpenPrivacy={() => {
+                  setLegalTab("privacy");
+                  setLegalModalOpen(true);
+                }}
+              />
             </motion.div>
           </div>
 
