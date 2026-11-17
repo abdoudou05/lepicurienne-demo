@@ -355,7 +355,7 @@ const copy = {
       rights: "Tous droits réservés.",
       legal: "Mentions Légales",
       privacy: "Politique de Confidentialité",
-      attributionPrefix: "Conçu avec passion par",
+      studioCredit: "Conception par Webryk Studio",
     },
     alt: {
       logo: "Logo L'Épicurienne By Waycha",
@@ -668,7 +668,7 @@ const copy = {
       rights: "All rights reserved.",
       legal: "Legal Notice",
       privacy: "Privacy Policy",
-      attributionPrefix: "Designed with passion by",
+      studioCredit: "Designed by Webryk Studio",
     },
     alt: {
       logo: "L'Épicurienne By Waycha logo",
@@ -1380,24 +1380,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 text-center">
-            <p className="text-white/40 text-[10px] md:text-xs flex items-center gap-1.5 flex-wrap justify-center">
-              <span>© {new Date().getFullYear()} L'Épicurienne By Waycha. {t.footer.rights}</span>
-              <span className="hidden sm:inline text-white/20">•</span>
-              <span>
-                {t.footer.attributionPrefix}{" "}
-                <a
-                  href="https://webryk.ca"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visiter le site de Webryk Studio (s'ouvre dans un nouvel onglet)"
-                  className="text-primary hover:underline font-semibold transition-colors inline-flex items-center gap-1 min-h-[44px] py-1"
-                >
-                  Webryk Studio
-                </a>
-              </span>
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-white/40 text-[10px] md:text-xs">
+          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2 md:gap-6 text-center text-white/65 text-xs">
+            <p>© {new Date().getFullYear()} L'Épicurienne By Waycha. {t.footer.rights}</p>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-0">
               <button
                 type="button"
                 onClick={() => {
@@ -1418,6 +1403,13 @@ export default function Home() {
               >
                 {t.footer.privacy}
               </button>
+              <a
+                className="studio-credit inline-flex min-h-[44px] items-center hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors"
+                href={language === "fr" ? "https://webryk.ca/fr" : "https://webryk.ca/en"}
+                aria-label={t.footer.studioCredit}
+              >
+                {t.footer.studioCredit}
+              </a>
             </div>
           </div>
         </div>
