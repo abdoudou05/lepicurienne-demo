@@ -356,6 +356,7 @@ const copy = {
       legal: "Mentions Légales",
       privacy: "Politique de Confidentialité",
       studioCredit: "Conception par Webryk Studio",
+      studioCreditPrefix: "Conception par",
     },
     alt: {
       logo: "Logo L'Épicurienne By Waycha",
@@ -669,6 +670,7 @@ const copy = {
       legal: "Legal Notice",
       privacy: "Privacy Policy",
       studioCredit: "Designed by Webryk Studio",
+      studioCreditPrefix: "Designed by",
     },
     alt: {
       logo: "L'Épicurienne By Waycha logo",
@@ -1404,11 +1406,20 @@ export default function Home() {
                 {t.footer.privacy}
               </button>
               <a
-                className="studio-credit inline-flex min-h-[44px] items-center hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors"
+                className="studio-credit group inline-flex min-h-[44px] items-center gap-2 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors"
                 href={language === "fr" ? "https://webryk.ca/fr" : "https://webryk.ca/en"}
                 aria-label={t.footer.studioCredit}
               >
-                {t.footer.studioCredit}
+                <span className="group-hover:underline">{t.footer.studioCreditPrefix}</span>
+                <img
+                  src="/assets/webryk-studio.webp"
+                  alt=""
+                  width="320"
+                  height="106"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-[88px] h-auto opacity-70 group-hover:opacity-100 transition-opacity"
+                />
               </a>
             </div>
           </div>
